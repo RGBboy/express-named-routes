@@ -97,6 +97,7 @@ app.get(app.lookupRoute('resource'), function (req, res, next) {
 
 ## To Do
 
+  * Add tests and documentation for retrieving all routes.
   * Add ability to declare nested routes:
 
 ```javascript
