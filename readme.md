@@ -1,6 +1,6 @@
 # express-named-routes
 
-  Route storage and lookup via a name.
+  Route storage, lookup and conversion to usable paths.
 
 ## Installation
 
@@ -46,7 +46,6 @@ app.defineRoute('resource', {
   show: '/resource/:param',
   edit: '/resource/:param/edit'
 });
-
 ```
 
   Looking up a route that points to an object containing multiple routes will return the
@@ -55,7 +54,6 @@ app.defineRoute('resource', {
 ```javascript
 
 app.lookupRoute('resource'); // returns '/resource'
-
 ```
 
   To lookup nested routes use the `.` notation:
@@ -64,8 +62,8 @@ app.lookupRoute('resource'); // returns '/resource'
 
 app.lookupRoute('resource.show'); // returns '/resource/:param';
 app.lookupRoute('resource.edit'); // returns '/resource/:param/edit;
-
 ```
+
 ## Converting routes to usable paths (URLS)
 
   A helper function is added to your request object to convert a route to a usable path.
@@ -79,7 +77,6 @@ app.get('/some/other/route', function (req, res, next) {
   var linkToSignin = req.routeToPath('signin'); // '/signin'
   next();
 });
-
 ```
 
   If the route contains params, these will be replaced by the params
@@ -96,7 +93,6 @@ app.get(app.lookupRoute('resource'), function (req, res, next) {
   var nextResourcePath = req.routeToPath('resource', { resourceId: resourceId + 1}); // e.g. '/resource/2'
   next();
 });
-
 ```
 
 ## To Do
@@ -106,7 +102,6 @@ app.get(app.lookupRoute('resource'), function (req, res, next) {
 ```javascript
 
 app.defineRoute('resource.show', '/resource/:resourceId');
-
 ```
 
 ## License 
