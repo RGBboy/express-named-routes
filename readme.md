@@ -76,7 +76,7 @@ app.lookupRoute('resource.edit'); // returns '/resource/:param/edit;
 app.defineRoute('signin', '/signin');
 
 app.get('/some/other/route', function (req, res, next) {
-  var linkToSignin = req.routeToPath('signin');
+  var linkToSignin = req.routeToPath('signin'); // '/signin'
   next();
 });
 
@@ -93,7 +93,7 @@ app.defineRoute('resource', '/resource/:resourceId');
 app.get(app.lookupRoute('resource'), function (req, res, next) {
   var resourceId = req.params.resourceId;
   var currentResourcePath = req.routeToPath('resource'); // e.g. '/resource/1'
-  var nextResourcePath = req.routeToPath('resource', { resourceId: resourceId + 1}); e.g. '/resource/2'
+  var nextResourcePath = req.routeToPath('resource', { resourceId: resourceId + 1}); // e.g. '/resource/2'
   next();
 });
 
