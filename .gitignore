@@ -1,0 +1,16 @@
+node_modules/
+
+# Images #
+##########
+
+*.ico
+*.gif
+*.bmp
+*.png
+*.jpg
+*.jpeg
+
+# Other #
+#########
+
+*.tmproj
