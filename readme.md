@@ -26,7 +26,6 @@ namedRoutes.extend(app);
 ```javascript
 
 app.defineRoute('signin', '/signin');
-
 ```
 
   Routes can be retrieved via `app.lookupRoute(routeName)`:
@@ -34,7 +33,6 @@ app.defineRoute('signin', '/signin');
 ```javascript
 
 app.lookupRoute('signin'); // returns '/signin'
-
 ```
 
   You may also pass in an object containing nested routes:
