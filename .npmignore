@@ -1,3 +1,5 @@
-test
-example
+.git*
+example/
+test/
+.DS_Store
 *.tmproj
