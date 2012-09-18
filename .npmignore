@@ -1,4 +1,5 @@
 .git*
+.travis*
 example/
 test/
 .DS_Store
