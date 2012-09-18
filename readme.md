@@ -2,6 +2,8 @@
 
   Route storage, lookup and conversion to usable paths.
 
+  [![Build Status](https://secure.travis-ci.org/RGBboy/express-named-routes.png)](http://travis-ci.org/RGBboy/express-named-routes)
+
 ## Installation
 
   Works with Express 3.0.x
