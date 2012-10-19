@@ -99,7 +99,6 @@ app.get(app.lookupRoute('resource'), function (req, res, next) {
 ## To Do
 
   * Returned route objects should be read-only
-  * Add tests and documentation for retrieving all routes.
   * Add ability to declare nested routes:
 
 ```javascript
