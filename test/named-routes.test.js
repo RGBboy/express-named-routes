@@ -61,17 +61,26 @@ describe('Named Routes', function () {
 
   describe('app.lookupRoute', function () {
 
+    it('should return the base route object if no params are passed', function (done) {
+      var testRoutes = app.lookupRoute();
+      testRoutes[routeName].should.equal(route)
+      testRoutes[nestedRouteName].should.equal(nestedRoute)
+      testRoutes[paramRouteName].should.equal(paramRoute)
+      done();
+    });
+
     it('should return the correct route', function (done) {
       app.lookupRoute(routeName).should.equal(route);
       done();
     });
 
-    it('should return the index if route is an object', function (done) {
-      app.lookupRoute(nestedRouteName).should.equal(nestedRoute.index);
+    it('should return the route object if route is an object', function (done) {
+      app.lookupRoute(nestedRouteName).should.equal(nestedRoute);
       done();
     });
 
     it('should return a nested route', function (done) {
+      app.lookupRoute(nestedRouteName + '.index').should.equal(nestedRoute.index);
       app.lookupRoute(nestedRouteName + '.show').should.equal(nestedRoute.show);
       done();
     });
@@ -96,20 +105,28 @@ describe('Named Routes', function () {
         });
     });
 
-    it('should return the index path if route is an object', function (done) {
+    it('should throw if route is an object', function (done) {
 
       app.get(nestedRoute.index, function(req, res, next) {
-        res.send(req.routeToPath(nestedRouteName));
+        (function(){req.routeToPath(nestedRouteName)}).should.throw();
+        done();
       })
 
       request(app)
         .get(nestedRoute.index)
-        .expect(200)
-        .end(function (err, res) {
-          if (err) throw err;
-          res.text.should.equal(nestedRoute.index);
-          done();
-        });
+        .end();
+    });
+
+    it('should throw if route does not exist', function (done) {
+
+      app.get(nestedRoute.index, function(req, res, next) {
+        (function(){req.routeToPath('undefinedRoute')}).should.throw();
+        done();
+      })
+
+      request(app)
+        .get(nestedRoute.index)
+        .end();
     });
 
     it('should return a nested route path', function (done) {

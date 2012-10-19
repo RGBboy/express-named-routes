@@ -49,17 +49,18 @@ app.defineRoute('resource', {
 ```
 
   Looking up a route that points to an object containing multiple routes will return the
-  index route:
+  route object:
 
 ```javascript
 
-app.lookupRoute('resource'); // returns '/resource'
+app.lookupRoute('resource'); // returns { index: '/resource', show: '/resource/:param', edit: '/resource/:param/edit' }
 ```
 
   To lookup nested routes use the `.` notation:
 
 ```javascript
 
+app.lookupRoute('resource.index'); // returns '/resource';
 app.lookupRoute('resource.show'); // returns '/resource/:param';
 app.lookupRoute('resource.edit'); // returns '/resource/:param/edit;
 ```
@@ -97,6 +98,7 @@ app.get(app.lookupRoute('resource'), function (req, res, next) {
 
 ## To Do
 
+  * Returned route objects should be read-only
   * Add tests and documentation for retrieving all routes.
   * Add ability to declare nested routes:
 
