@@ -19,16 +19,16 @@ describe('Named Routes', function () {
       paramRoute;
 
   beforeEach(function (done) {
-    app = express()
-    routeName = 'routeName'
-    route = '/route'
-    nestedRouteName = 'nestedRouteName'
+    app = express();
+    routeName = 'routeName';
+    route = '/route';
+    nestedRouteName = 'nestedRouteName';
     nestedRoute = {
       index: '/nested-route',
       show: '/nested-route/show'
-    },
-    paramRouteName = 'paramRouteName',
-    paramRouteBase = '/param-route',
+    };
+    paramRouteName = 'paramRouteName';
+    paramRouteBase = '/param-route';
     paramRoute = paramRouteBase + '/:param';
 
     namedRoutes.extend(app);
@@ -89,7 +89,7 @@ describe('Named Routes', function () {
 
   describe('request.routeToPath', function () {
 
-    it('should return a path', function (done) {
+    it('should return a path if it exists', function (done) {
 
       app.get(route, function(req, res, next) {
         res.send(req.routeToPath(routeName));
@@ -165,7 +165,7 @@ describe('Named Routes', function () {
 
       app.get(paramRoute, function(req, res, next) {
         res.send(req.routeToPath(paramRouteName, { param: '2' }));
-      })
+      });
 
       request(app)
         .get(paramRouteBase + '/1')
@@ -175,6 +175,52 @@ describe('Named Routes', function () {
           res.text.should.equal(paramRouteBase + '/2');
           done();
         });
+    });
+
+    describe('is mounted', function () {
+
+      var app2,
+          mountedRouteName,
+          mountedRoute;
+
+      beforeEach(function (done) {
+        app2 = express();
+        mountedRouteName = 'mountedRoute';
+        mountedRoute = '/mounted-route';
+        namedRoutes.extend(app2);
+        app2.defineRoute(mountedRouteName, mountedRoute);
+        app.use('/mounted-application', app2);
+        done();
+      });
+
+      it('should return a mounted route path', function (done) {
+        app2.get(mountedRoute, function(req, res, next) {
+          res.send(req.routeToPath(mountedRouteName));
+        });
+        request(app)
+          .get('/mounted-application' + mountedRoute)
+          .expect(200)
+          .end(function (err, res) {
+            if (err) throw err;
+            res.text.should.equal(mountedRoute);
+            done();
+          });
+      });
+
+      it('should return a parent route path', function (done) {
+        app2.get(mountedRoute, function(req, res, next) {
+          res.send(req.routeToPath(routeName));
+        });
+        request(app)
+          .get('/mounted-application' + mountedRoute)
+          .expect(200)
+          .end(function (err, res) {
+            if (err) throw err;
+            res.text.should.equal(route);
+            done();
+          });
+      });
+
     });
 
   });
