@@ -99,7 +99,6 @@ app.get(app.lookupRoute('resource'), function (req, res, next) {
 ## To Do
 
   * Returned route objects should be read-only
-  * Allow nested req.routeToPath (used when mounting multiple apps with named routes)
   * Add ability to declare nested routes:
 
 ```javascript
