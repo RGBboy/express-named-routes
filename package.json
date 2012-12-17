@@ -1,12 +1,12 @@
 {
   "name": "express-named-routes",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Express Named Routes",
   "keywords": ["express"],
   "author": "RGBboy <me@rgbboy.com>",
   "repository" : {
     "type" : "git",
-    "url" : "http://github.com/RGBboy/express-mailer"
+    "url" : "http://github.com/RGBboy/express-named-routes"
   },
   "dependencies": {},
   "devDependencies": {
