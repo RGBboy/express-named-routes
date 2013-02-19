@@ -1,6 +1,6 @@
 {
   "name": "express-named-routes",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Express Named Routes",
   "keywords": ["express"],
   "author": "RGBboy <me@rgbboy.com>",
